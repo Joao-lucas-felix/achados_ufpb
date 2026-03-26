@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Landingpage</h1>
+<a href="{% url 'post-create'%}">Criar Post</a>
+<a href="{% url 'posts' %}">Ver Posts</a>
+<a href="{% url 'login' %}">Logar</a>
+
+{% endblock content %}

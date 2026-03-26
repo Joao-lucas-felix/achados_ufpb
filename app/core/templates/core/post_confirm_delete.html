@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Tem certeza que deseja deletar?</h2>
+
+<p>{{ object.titulo }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+</form>
+
+<a href="{% url 'posts' %}">Cancelar</a>
+
+{% endblock %}

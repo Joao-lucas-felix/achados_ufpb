@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achados UFPB</title>
+</head>
+<body>
+
+    <nav>
+        {% if user.is_authenticated %}
+            <span>Olá, {{ user.username }}</span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Sair</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Entrar</a>
+            <a href="{% url 'register' %}">Cadastrar</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

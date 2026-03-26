@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Achados e Perdidos</h1>
+
+{% for post in posts %}
+    <div>
+        <h3>{{ post.titulo }}</h3>
+
+        <img src="{{ post.imagem.url }}" width="200">
+
+        <p>{{ post.descricao }}</p>
+
+        {% if post.local_encontrado %}
+            <p><strong>Local:</strong> {{ post.local_encontrado }}</p>
+        {% endif %}
+
+        <p><small>Publicado em {{ post.criado_em }}</small></p>
+
+        {% if user.is_authenticated %}
+            {% if user == post.autor %}
+                <a href="{% url 'post-update' post.pk %}">Editar</a>
+                <a href="{% url 'post-delete' post.pk %}">Deletar</a>
+            {% endif %}
+        {% endif %}
+    
+    </div>
+{% empty %}
+    <p>Nenhum item encontrado.</p>
+{% endfor %}
+
+{% endblock %}
