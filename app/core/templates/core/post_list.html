@@ -1,32 +1,65 @@
 {% extends 'base.html' %}
 
+{% block title %}Itens | Achados UFPB{% endblock %}
+
 {% block content %}
-<h1>Achados e Perdidos</h1>
-
-{% for post in posts %}
-    <div>
-        <h3>{{ post.titulo }}</h3>
-
-        <img src="{{ post.imagem.url }}" width="200">
-
-        <p>{{ post.descricao }}</p>
-
-        {% if post.local_encontrado %}
-            <p><strong>Local:</strong> {{ post.local_encontrado }}</p>
-        {% endif %}
-
-        <p><small>Publicado em {{ post.criado_em }}</small></p>
+<section class="space-y-5">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div class='mb-2'>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[#ffd98f]">acervo</p>
+            <h1 class="mt-2 font-['Fraunces'] text-3xl tracking-[-0.04em] text-[#fff8f2] sm:text-5xl">Itens registrados</h1>
+        </div>
 
         {% if user.is_authenticated %}
-            {% if user == post.autor %}
-                <a href="{% url 'post-update' post.pk %}">Editar</a>
-                <a href="{% url 'post-delete' post.pk %}">Deletar</a>
-            {% endif %}
+            <a href="{% url 'post-create' %}" class="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] px-5 py-3 text-sm font-semibold text-[#201511] transition hover:brightness-105">
+                Novo item
+            </a>
         {% endif %}
-    
     </div>
-{% empty %}
-    <p>Nenhum item encontrado.</p>
-{% endfor %}
 
+    {% if posts %}
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {% for post in posts %}
+                <article class="overflow-hidden rounded-[1.8rem] border border-white/10 bg-[#211712]/68">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/20">
+                        <img src="{{ post.imagem.url }}" alt="Imagem do item {{ post.titulo }}" class="h-full w-full object-cover">
+                        {% if post.local_encontrado %}
+                            <span class="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-[#fff8f2] backdrop-blur">{{ post.local_encontrado }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="space-y-4 p-4">
+                        <div class="space-y-2">
+                            <h2 class="text-lg font-bold text-[#fff8f2]">{{ post.titulo }}</h2>
+                            {% if post.descricao %}
+                                <small class="block text-xs leading-6 text-[#cbbfb4]">{{ post.descricao|truncatechars:90 }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex items-center justify-between gap-3 border-t border-white/10 pt-4">
+                            <small class="text-xs text-[#a19081]">{{ post.criado_em|date:"d/m/Y H:i" }}</small>
+
+                            {% if user.is_authenticated and user == post.autor %}
+                                <div class="flex items-center gap-3 text-sm font-semibold">
+                                    <a href="{% url 'post-update' post.pk %}" class="text-[#e7ddd2] transition hover:text-[#fff8f2]">Editar</a>
+                                    <a href="{% url 'post-delete' post.pk %}" class="text-rose-300 transition hover:text-rose-200">Excluir</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="rounded-[1.8rem] border border-dashed border-white/15 bg-[#211712]/55 p-8 text-center">
+            <h2 class="text-lg font-bold text-[#fff8f2]">Nenhum item ainda</h2>
+            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">Quando a secretaria cadastrar algo, ele aparece aqui.</p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'post-create' %}" class="mt-5 inline-flex items-center rounded-full bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] px-5 py-3 text-sm font-semibold text-[#201511] transition hover:brightness-105">
+                    Registrar primeiro item
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
 {% endblock %}

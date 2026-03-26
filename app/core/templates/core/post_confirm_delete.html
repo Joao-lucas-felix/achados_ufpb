@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
+{% block title %}Excluir Item | Achados UFPB{% endblock %}
+
 {% block content %}
-<h2>Tem certeza que deseja deletar?</h2>
+<section class="mx-auto max-w-md">
+    <div class="rounded-[2rem] border border-rose-400/20 bg-[#211712]/72 p-6 shadow-2xl shadow-black/20 backdrop-blur">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-rose-300">acao sensivel</p>
+        <h1 class="mt-3 font-['Fraunces'] text-4xl tracking-[-0.04em] text-[#fff8f2]">Excluir item?</h1>
+        <p class="mt-2 text-sm leading-8 text-[#cbbfb4]">O registro <strong class="text-[#fff8f2]">{{ object.titulo }}</strong> sera removido da listagem.</p>
 
-<p>{{ object.titulo }}</p>
-
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Confirmar</button>
-</form>
-
-<a href="{% url 'posts' %}">Cancelar</a>
-
+        <form method="post" class="mt-6 flex flex-col gap-3 sm:flex-row">
+            {% csrf_token %}
+            <button type="submit" class="inline-flex items-center justify-center rounded-full bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-rose-400">
+                Confirmar
+            </button>
+            <a href="{% url 'posts' %}" class="inline-flex items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm font-semibold text-[#f7efe5] transition hover:bg-white/5">
+                Cancelar
+            </a>
+        </form>
+    </div>
+</section>
 {% endblock %}

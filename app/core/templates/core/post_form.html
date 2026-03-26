@@ -1,13 +1,66 @@
 {% extends 'base.html' %}
 
+{% block title %}{% if object %}Editar Item{% else %}Novo Item{% endif %} | Achados UFPB{% endblock %}
+
 {% block content %}
-<h2>{% if object %}Editar{% else %}Criar{% endif %} Post</h2>
+<section class="mx-auto max-w-4xl space-y-5">
+    <div class="space-y-2">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[#ffd98f]">{% if object %}edicao{% else %}cadastro{% endif %}</p>
+        <h1 class="font-['Fraunces'] text-3xl tracking-[-0.04em] text-[#fff8f2] sm:text-5xl">{% if object %}Atualize o item{% else %}Novo item perdido{% endif %}</h1>
+        <p class="max-w-2xl text-sm leading-8 text-[#cbbfb4]">Formulario curto, visual quente e foto em destaque logo na primeira dobra.</p>
+    </div>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
 
-    <button type="submit">Salvar</button>
-</form>
+        {% if form.non_field_errors %}
+            <div class="rounded-3xl border border-rose-400/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
 
+        <section class="overflow-hidden rounded-[2rem] border border-white/10 bg-[#211712]/72 p-5 shadow-2xl shadow-black/20 backdrop-blur">
+            <div class="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+                <div class="space-y-3">
+                    <span class="inline-flex rounded-full border border-[#f4c95d]/20 bg-[#f4c95d]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[#ffd98f]">
+                        Imagem
+                    </span>
+                    <h2 class="font-['Fraunces'] text-3xl tracking-[-0.04em] text-[#fff8f2]">Imagem do item</h2>
+                    <p class="text-sm leading-8 text-[#d2c6bb]">Use uma foto frontal, com fundo simples e foco total no objeto. Esse bloco espelha o destaque do prototipo.</p>
+                </div>
+
+                <div class="rounded-[1.75rem] border border-white/10 bg-black/20 p-4 backdrop-blur">
+                    <label for="{{ form.imagem.id_for_label }}" class="mb-2 block text-sm font-semibold text-[#fff8f2]">{{ form.imagem.label }}</label>
+                    {{ form.imagem }}
+                    {{ form.imagem.errors }}
+                </div>
+            </div>
+        </section>
+
+        <section class="rounded-[2rem] border border-white/10 bg-[#211712]/68 p-5">
+            <div class="grid gap-4 md:grid-cols-2">
+                {% for field in form %}
+                    {% if field.name != 'imagem' %}
+                        <div class="{% if field.name == 'descricao' %}md:col-span-2{% endif %}">
+                            <label for="{{ field.id_for_label }}" class="mb-2 block text-sm font-semibold text-[#f7efe5]">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="mt-2 text-sm text-rose-300">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+
+        <div class="flex flex-col gap-3 sm:flex-row">
+            <button type="submit" class="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] px-5 py-3 text-sm font-semibold text-[#201511] transition hover:brightness-105">
+                Salvar item
+            </button>
+            <a href="{% url 'posts' %}" class="inline-flex items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm font-semibold text-[#f7efe5] transition hover:bg-white/5">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</section>
 {% endblock %}

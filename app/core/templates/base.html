@@ -1,28 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achados UFPB</title>
+    <title>{% block title %}Achados UFPB{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/css/app.css' %}">
 </head>
-<body>
+<body class="min-h-screen antialiased">
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-[#120d0b]/55 backdrop-blur-xl">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <a href="{% url 'home' %}" class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] font-black text-[#201511]">U</div>
+                <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold text-[#fff8f2]">Achados UFPB</p>
+                    <p class="truncate text-xs text-[#cbbfb4]">Sistema interno do centro</p>
+                </div>
+            </a>
 
-    <nav>
-        {% if user.is_authenticated %}
-            <span>Olá, {{ user.username }}</span>
-            <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">Sair</button>
-            </form>
-        {% else %}
-            <a href="{% url 'login' %}">Entrar</a>
-            <a href="{% url 'register' %}">Cadastrar</a>
-        {% endif %}
-    </nav>
+            <nav class="flex flex-wrap items-center gap-2 text-sm">
+                <a href="{% url 'home' %}" class="rounded-full px-3 py-2 text-[#e2d8cc] transition hover:bg-white/5 hover:text-[#fff8f2]">Inicio</a>
+                <a href="{% url 'posts' %}" class="rounded-full px-3 py-2 text-[#e2d8cc] transition hover:bg-white/5 hover:text-[#fff8f2]">Itens</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'post-create' %}" class="rounded-full bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] px-4 py-2 font-semibold text-[#201511] transition hover:brightness-105">Novo</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
 
-    <hr>
-
-    {% block content %}{% endblock %}
-
+    <main class="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
