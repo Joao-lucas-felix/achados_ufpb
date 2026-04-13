@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
-
+from django.contrib.auth.decorators import login_required
 from .forms import PostForm, RegisterForm
 from .models import Post
 
@@ -16,7 +16,7 @@ def home(request):
         context={"latest_posts": latest_posts},
     )
 
-
+@login_required()
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)

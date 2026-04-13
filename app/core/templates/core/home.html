@@ -8,23 +8,23 @@
         <div class="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
             <div class="space-y-5">
                 <span class="inline-flex rounded-full border border-[#f4c95d]/20 bg-[#f4c95d]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[#ffd98f]">
-                    visual de apresentacao
+                    centro de informatica
                 </span>
                 <div class="space-y-3">
-                    <h1 class="max-w-3xl font-['Fraunces'] text-4xl font-black tracking-[-0.04em] text-[#fff8f2] sm:text-6xl sm:leading-none">
-                        Achados e perdidos com a mesma linguagem do prototipo Angular.
+                    <h1 class="max-w-3xl font-['Fraunces'] text-2xl font-black tracking-[-0.04em] text-[#fff8f2] sm:text-6xl sm:leading-none">
+                        Achados e Perdidos do CI.
                     </h1>
                     <p class="max-w-2xl text-sm leading-8 text-[#d2c6bb] sm:text-base">
-                        Portamos a direcao visual para o Django com a mesma base escura, tons quentes, cards de foto dominante e leitura simples para mobile.
+                        Consulte itens encontrados no Centro de Informatica, acompanhe os registros mais recentes e facilite a devolucao para alunos, servidores e visitantes.
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-3">
                     <a href="{% url 'posts' %}" class="inline-flex items-center rounded-full bg-gradient-to-br from-[#f4c95d] to-[#ef8f4b] px-5 py-3 text-sm font-semibold text-[#201511] transition hover:brightness-105">
-                        Ver catalogo
+                        Ver itens registrados
                     </a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'post-create' %}" class="inline-flex items-center rounded-full border border-white/12 bg-white/4 px-5 py-3 text-sm font-semibold text-[#fff8f2] transition hover:bg-white/8">
-                            Cadastrar item
+                            Registrar item encontrado
                         </a>
                     {% endif %}
                 </div>
@@ -32,16 +32,16 @@
 
             <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 <div class="rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
-                    <p class="text-2xl font-black text-[#fff8f2]">1</p>
-                    <p class="mt-1 text-sm text-[#d2c6bb]">foto dominante</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd98f]">Consulta</p>
+                    <p class="mt-2 text-sm leading-7 text-[#d2c6bb]">Veja rapidamente os itens que chegaram ao CI e identifique o que pode ser devolvido.</p>
                 </div>
                 <div class="rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
-                    <p class="text-2xl font-black text-[#fff8f2]">2</p>
-                    <p class="mt-1 text-sm text-[#d2c6bb]">campos enxutos</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd98f]">Registro interno</p>
+                    <p class="mt-2 text-sm leading-7 text-[#d2c6bb]">A equipe autorizada registra novos itens com local, imagem e observacoes para apoiar o atendimento.</p>
                 </div>
                 <div class="rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
-                    <p class="text-2xl font-black text-[#fff8f2]">3</p>
-                    <p class="mt-1 text-sm text-[#d2c6bb]">mobile first</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd98f]">Devolucao</p>
+                    <p class="mt-2 text-sm leading-7 text-[#d2c6bb]">Centralize a comunicacao dos achados e perdidos e acelere a entrega dos objetos aos donos.</p>
                 </div>
             </div>
         </div>
@@ -49,16 +49,16 @@
 
     <div class="grid gap-4 md:grid-cols-3">
         <article class="rounded-[1.75rem] border border-white/10 bg-[#211712]/68 p-5">
-            <p class="text-sm font-semibold text-[#fff8f2]">Identidade quente</p>
-            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">A mesma combinacao de marrom escuro, creme e dourado do prototipo agora guia o site real.</p>
+            <p class="text-sm font-semibold text-[#fff8f2]">Atendimento mais rapido</p>
+            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">A consulta centralizada reduz o tempo entre o registro do item e o contato com quem o perdeu.</p>
         </article>
         <article class="rounded-[1.75rem] border border-white/10 bg-[#211712]/68 p-5">
-            <p class="text-sm font-semibold text-[#fff8f2]">Leitura mais calma</p>
-            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">Cards com mais respiro, titulos fortes e texto de apoio sempre secundario.</p>
+            <p class="text-sm font-semibold text-[#fff8f2]">Rotina do CI</p>
+            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">Secretaria, recepcao e laboratorios podem consultar o mesmo acervo sem depender de controles paralelos.</p>
         </article>
         <article class="rounded-[1.75rem] border border-white/10 bg-[#211712]/68 p-5">
-            <p class="text-sm font-semibold text-[#fff8f2]">Fluxo preservado</p>
-            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">Mudamos a aparencia sem alterar a logica de cadastro, edicao e exclusao do Django.</p>
+            <p class="text-sm font-semibold text-[#fff8f2]">Acompanhamento simples</p>
+            <p class="mt-2 text-sm leading-7 text-[#cbbfb4]">Os ultimos registros ficam visiveis logo na entrada para facilitar a triagem diaria da equipe.</p>
         </article>
     </div>
 
@@ -66,11 +66,11 @@
         <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <span class="inline-flex rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[#f7efe5]">
-                    itens recentes
+                    acervo recente
                 </span>
-                <h2 class="mt-3 font-['Fraunces'] text-3xl tracking-[-0.04em] text-[#fff8f2]">Preview do acervo</h2>
+                <h2 class="mt-3 font-['Fraunces'] text-3xl tracking-[-0.04em] text-[#fff8f2]">Ultimos itens registrados no CI</h2>
             </div>
-            <a href="{% url 'posts' %}" class="text-sm font-semibold text-[#ffd98f]">Abrir listagem completa</a>
+            <a href="{% url 'posts' %}" class="text-sm font-semibold text-[#ffd98f]">Abrir catalogo completo</a>
         </div>
 
         {% if latest_posts %}
@@ -91,7 +91,7 @@
             </div>
         {% else %}
             <div class="rounded-[1.75rem] border border-dashed border-white/12 bg-[#211712]/55 p-6">
-                <p class="text-sm leading-7 text-[#cbbfb4]">Assim que houver itens cadastrados, eles aparecem aqui como vitrine inicial.</p>
+                <p class="text-sm leading-7 text-[#cbbfb4]">Quando a equipe registrar novos itens encontrados no CI, eles passam a aparecer aqui automaticamente.</p>
             </div>
         {% endif %}
     </section>
